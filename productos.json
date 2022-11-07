@@ -1,1 +1,15 @@
-[]
+[   {
+    "nombre" : "Aceite facial piel seca",
+    "precio": 200
+},
+
+{
+    "nombre": "Aceite facial piel grasa",
+    "precio": 300
+},
+
+{
+    "nombre": "Aceite facial piel mixta",
+    "precio":  400
+}
+]
