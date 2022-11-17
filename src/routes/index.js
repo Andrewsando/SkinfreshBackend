@@ -37,10 +37,6 @@ const router = function() {
         res.send({ visitas })
     
     })
-    
-    // router.get('/', (request, response) => {
-    //     response.sendFile(path.resolve(__dirname + "../../../public/form.html"))
-    // })
 
     router.use('/api/productos', productos(router))
 
