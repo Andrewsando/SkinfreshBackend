@@ -1,8 +1,4 @@
-const ProductosService = require("../../services/ProductosService")
-
-const productosRouter = function(router){
-
-    const productosService = new ProductosService()
+const productosRouter = function(router, productosService){
 
     router.get('/', (request, response ) =>{
         response.send(productosService.getAll())

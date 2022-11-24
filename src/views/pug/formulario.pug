@@ -1,0 +1,23 @@
+h1(style="color:blue") Ingrese datos del producto
+
+br
+
+form(action= "/productos", method="post")
+    div(class="form-group")
+        label(for="producto")
+        b Producto
+        input(id="producto", class="form-control", type="text", name="producto")/
+    
+
+    div(class="form-group")
+        label(for="precio")
+        b precio
+        input(id="precio", class="form-control", type="text", name="precio")/
+
+    div(class="form-group")
+        label(for="imagen")
+        b imagen
+        input(id="imagen", class="form-control", type="text", name="imagen")/
+   
+
+    button(class="btn btn-success mt-3 mb-5") Enviar

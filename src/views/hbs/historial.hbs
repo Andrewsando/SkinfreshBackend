@@ -1,0 +1,22 @@
+<h2 style="color:crimson">Historial</h2>
+
+{{#if productos includeZero=true }}
+<div class="table-respondive">
+    <table class="table table-dark">
+        <tr style="color:yellow;">
+            <th>producto</th>
+            <th>precio</th>
+            <th>imagen</th>
+        </tr>
+        {{#each productos}}
+        <tr>
+            <td>{{producto}}</td>
+            <td>{{precio}}</td>
+            <td><img src={{imagen}}></td>
+        </tr>
+        {{/each}}
+    </table>
+</div>
+{{else}}
+    <h3 class='alert alert-danger'>no se encontraron datos</h3>
+{{/if}}

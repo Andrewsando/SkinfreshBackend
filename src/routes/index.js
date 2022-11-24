@@ -1,12 +1,16 @@
 const Container = require("../../Contenedor.js")
 const moment = require('moment');
 const productos = require("./api/productos.js");
+const ProductosService = require("../services/ProductosService")
 const { Router } = require("express");
 var path = require('path');
+const views = require("../views/index.js");
 
-const router = function() {
+const router = function(app) {
     
     const router = Router();
+
+    const productosService = new ProductosService()
 
     //Instanciamos la clase
     const archivo = new Container('productos.json')
@@ -18,13 +22,6 @@ const router = function() {
         fecha_ingreso_productos_random: ''
     }
     
-    router.get('/productos', async (req, res) => {
-        visitas.productos++
-        visitas.fecha_ingreso_productos = moment().format('MMMM Do YYYY, h:mm:ss a');
-        const prods = await archivo.getAll()
-        res.send({ productos: prods })
-    })
-    
     router.get('/random', async (req, res) => {
         visitas.prod_random++
         visitas.fecha_ingreso_productos_random = moment().format('MMMM Do YYYY, h:mm:ss a');
@@ -35,10 +32,12 @@ const router = function() {
     
     router.get('/visitas', (req, res) => {
         res.send({ visitas })
-    
     })
 
-    router.use('/api/productos', productos(router))
+    //views
+    views(app, router, productosService)
+
+    router.use('/api/productos', productos(router, productosService))
 
     return router
 }
