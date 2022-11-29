@@ -9,23 +9,22 @@ const { Server: HttpServer } = require('http')
 const httpServer = new HttpServer(app)
 const io = new IO(httpServer)
 
-
-app.use(router(app))
-
+app.use(express.static('public'))
 // Sockets init
 io.on('connection', socket => {
     console.log('Nuevo cliente conectado!!');
 
     //on new-product emit products
-    socket.on('new-product')
-        io.sockets.emit('productos');
-
+    socket.on('new-product', (producto) =>
+        io.sockets.emit('producto', producto))
+        
+        
     socket.emit('message', messages)
 })
 
+app.use(router(app))
 
-
-app.listen(PORT, () => {
+httpServer.listen(PORT, () => {
     console.log(`Servidor corriendo en el puerto: ${PORT}`);
 })
 
