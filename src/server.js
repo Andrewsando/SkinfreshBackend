@@ -9,7 +9,7 @@ const { Server: HttpServer } = require('http')
 const httpServer = new HttpServer(app)
 const io = new IO(httpServer)
 
-// app.use(express.static('public'))
+
 app.use(router(app))
 
 // Sockets init
@@ -18,7 +18,9 @@ io.on('connection', socket => {
 
     //on new-product emit products
     socket.on('new-product')
-        io.sockets.emit('productos')
+        io.sockets.emit('productos');
+
+    socket.emit('message', messages)
 })
 
 
@@ -26,3 +28,11 @@ io.on('connection', socket => {
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en el puerto: ${PORT}`);
 })
+
+const messages = [
+    {correo: 'andres.torressandoval@hotmail.com', fecha: new Date(), text:'Hola, bienvenidos a mi proyecto'},
+    {correo: 'angelilala@hotmail.com', fecha: new Date(), text:'Muchas gracias!!'},
+    {correo: 'andres.torressandoval@hotmail.com', fecha: new Date(), text:'Con gusto'},
+]
+
+
