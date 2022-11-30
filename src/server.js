@@ -9,7 +9,7 @@ const { Server: HttpServer } = require('http')
 const httpServer = new HttpServer(app)
 const io = new IO(httpServer)
 
-app.use(express.static('public'))
+app.use(express.static('public', {extensions: ['html', 'htm']}))
 // Sockets init
 io.on('connection', socket => {
     console.log('Nuevo cliente conectado!!');
