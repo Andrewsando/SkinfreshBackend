@@ -9,7 +9,7 @@ const { Server: HttpServer } = require('http')
 const httpServer = new HttpServer(app)
 const io = new IO(httpServer)
 
-app.use(express.static('public', {extensions: ['html', 'htm']}))
+app.use(express.static('public', { extensions: ['html', 'htm'] }))
 // Sockets init
 io.on('connection', socket => {
     console.log('Nuevo cliente conectado!!');
@@ -17,8 +17,12 @@ io.on('connection', socket => {
     //on new-product emit products
     socket.on('new-product', (producto) =>
         io.sockets.emit('producto', producto))
-        
-        
+
+    socket.on('new-message', (message) => {
+        messages.push(message)
+        io.sockets.emit('message', messages)
+    })
+
     socket.emit('message', messages)
 })
 
@@ -29,9 +33,9 @@ httpServer.listen(PORT, () => {
 })
 
 const messages = [
-    {correo: 'andres.torressandoval@hotmail.com', fecha: new Date(), text:'Hola, bienvenidos a mi proyecto'},
-    {correo: 'angelilala@hotmail.com', fecha: new Date(), text:'Muchas gracias!!'},
-    {correo: 'andres.torressandoval@hotmail.com', fecha: new Date(), text:'Con gusto'},
+    { correo: 'andres.torressandoval@hotmail.com', fecha: new Date(), text: 'Hola, bienvenidos a mi proyecto' },
+    { correo: 'angelilala@hotmail.com', fecha: new Date(), text: 'Muchas gracias!!' },
+    { correo: 'andres.torressandoval@hotmail.com', fecha: new Date(), text: 'Con gusto' },
 ]
 
 
